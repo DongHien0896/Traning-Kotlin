@@ -1,7 +1,8 @@
-package com.framgia.kotlintraining.moviedb
+package com.framgia.kotlintraining.moviedb.screen.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.framgia.kotlintraining.moviedb.R
 
 class MainActivity : AppCompatActivity() {
 
