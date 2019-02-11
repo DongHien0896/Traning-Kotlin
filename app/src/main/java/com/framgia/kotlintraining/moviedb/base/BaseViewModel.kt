@@ -1,7 +1,6 @@
 package com.framgia.kotlintraining.moviedb.base
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.ViewModel
 
-abstract class BaseViewModel(application: Application) : LifecycleObserver, AndroidViewModel(application)
+abstract class BaseViewModel : LifecycleObserver, ViewModel()

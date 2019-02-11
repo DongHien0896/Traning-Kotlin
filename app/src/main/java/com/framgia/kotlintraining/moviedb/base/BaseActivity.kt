@@ -25,9 +25,9 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
 
     internal fun addFragment(
         fragment: Fragment, container: Int, TAG: String,
-        addToBackStack: Boolean? = false, transit: Int? = -1
+        addToBackStack: Boolean, transit: Int = -1
     ) {
-        val transaction = supportFragmentManager!!.beginTransaction()
+        val transaction = supportFragmentManager.beginTransaction()
             .add(container, fragment)
 
         addToBackStack?.let { if (it) transaction.addToBackStack(TAG) }
@@ -38,7 +38,7 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
 
     internal fun replaceFragment(
         fragment: Fragment, container: Int, TAG: String?,
-        addToBackStack: Boolean? = false, transit: Int? = -1
+        addToBackStack: Boolean, transit: Int = -1
     ) {
         val transaction = supportFragmentManager!!.beginTransaction()
             .replace(container, fragment)

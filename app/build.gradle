@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -25,12 +27,6 @@ android {
     dataBinding {
         enabled = true
     }
-
-    dexOptions {
-        javaMaxHeapSize "2g"
-    }
-
-
 }
 
 dependencies {

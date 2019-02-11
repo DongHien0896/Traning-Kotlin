@@ -30,6 +30,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
 
         addToBackStack?.let { if (it) transaction.addToBackStack(TAG) }
         transit?.let { if (it != -1) transaction.setTransition(it) }
+
         transaction.commit()
     }
 
@@ -40,8 +41,10 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val viewBinding: ViewBinding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         val view = viewBinding.root
-        viewBinding.setLifecycleOwner(this)
-        viewBinding.root.isClickable = true
+        viewBinding.apply {
+            setLifecycleOwner(viewLifecycleOwner)
+            root.isClickable = true
+        }
         initComponent(viewBinding)
         lifecycle.addObserver(viewModel)
         return view
