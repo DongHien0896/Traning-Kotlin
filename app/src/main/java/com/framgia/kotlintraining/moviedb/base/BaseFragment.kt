@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 
 abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> : Fragment() {
 
@@ -16,26 +17,19 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
 
     abstract fun initComponent(viewBinding: ViewBinding)
 
-    abstract fun getLayoutResource(): Int
-
     internal fun replaceFragment(
         fragment: Fragment,
         container: Int,
         TAG: String?,
-        addToBackStack: Boolean? = false,
-        transit: Int? = -1
+        addToBackStack: Boolean = false,
+        transit: Int = -1
     ) {
-        val transaction = activity?.supportFragmentManager!!.beginTransaction()
-            .replace(container, fragment)
-
-        addToBackStack?.let { if (it) transaction.addToBackStack(TAG) }
-        transit?.let { if (it != -1) transaction.setTransition(it) }
-
-        transaction.commit()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        activity?.supportFragmentManager!!.beginTransaction().apply {
+            replace(container, fragment)
+            addToBackStack(TAG)
+            setTransition(FragmentTransaction.TRANSIT_NONE)
+            commit()
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

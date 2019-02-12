@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 
 abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
 
@@ -19,32 +20,27 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
         initComponent(savedInstanceState)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
-
     internal fun addFragment(
         fragment: Fragment, container: Int, TAG: String,
         addToBackStack: Boolean, transit: Int = -1
     ) {
-        val transaction = supportFragmentManager.beginTransaction()
-            .add(container, fragment)
-
-        addToBackStack?.let { if (it) transaction.addToBackStack(TAG) }
-        transit?.let { if (it != -1) transaction.setTransition(it) }
-        transaction.commit()
-
+        supportFragmentManager.beginTransaction().apply {
+            add(container, fragment)
+            addToBackStack(TAG)
+            setTransition(FragmentTransaction.TRANSIT_NONE)
+            commit()
+        }
     }
 
     internal fun replaceFragment(
         fragment: Fragment, container: Int, TAG: String?,
         addToBackStack: Boolean, transit: Int = -1
     ) {
-        val transaction = supportFragmentManager!!.beginTransaction()
-            .replace(container, fragment)
-
-        addToBackStack?.let { if (it) transaction.addToBackStack(TAG) }
-        transit?.let { if (it != -1) transaction.setTransition(it) }
-        transaction.commit()
+        supportFragmentManager.beginTransaction().apply {
+            replace(container, fragment)
+            addToBackStack(TAG)
+            setTransition(FragmentTransaction.TRANSIT_NONE)
+            commit()
+        }
     }
 }
