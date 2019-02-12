@@ -22,11 +22,13 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
 
     internal fun addFragment(
         fragment: Fragment, container: Int, TAG: String,
-        addToBackStack: Boolean, transit: Int = -1
+        addToBackStack: Boolean
     ) {
         supportFragmentManager.beginTransaction().apply {
             add(container, fragment)
-            addToBackStack(TAG)
+            if (addToBackStack) {
+                addToBackStack(TAG)
+            }
             setTransition(FragmentTransaction.TRANSIT_NONE)
             commit()
         }
@@ -34,11 +36,13 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
 
     internal fun replaceFragment(
         fragment: Fragment, container: Int, TAG: String?,
-        addToBackStack: Boolean, transit: Int = -1
+        addToBackStack: Boolean
     ) {
         supportFragmentManager.beginTransaction().apply {
             replace(container, fragment)
-            addToBackStack(TAG)
+            if (addToBackStack) {
+                addToBackStack(TAG)
+            }
             setTransition(FragmentTransaction.TRANSIT_NONE)
             commit()
         }

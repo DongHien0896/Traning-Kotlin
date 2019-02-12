@@ -21,12 +21,13 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         fragment: Fragment,
         container: Int,
         TAG: String?,
-        addToBackStack: Boolean = false,
-        transit: Int = -1
-    ) {
-        activity?.supportFragmentManager!!.beginTransaction().apply {
+        addToBackStack: Boolean = false
+        ) {
+        activity?.supportFragmentManager?.beginTransaction()?.apply {
             replace(container, fragment)
-            addToBackStack(TAG)
+            if (addToBackStack) {
+                addToBackStack(TAG)
+            }
             setTransition(FragmentTransaction.TRANSIT_NONE)
             commit()
         }
