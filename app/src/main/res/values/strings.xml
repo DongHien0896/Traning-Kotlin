@@ -2,4 +2,8 @@
     <string name="app_name">My Application</string>
     <string name="title_home">Home</string>
     <string name="title_favorite">Favorite</string>
+
+    <string name="msg_no_network">No internet connected!</string>
+    <string name="title_oops">Oop!</string>
+    <string name="title_try_again">Please, try again!</string>
 </resources>

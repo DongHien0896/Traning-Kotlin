@@ -1,7 +1,7 @@
 package com.framgia.kotlintraining.moviedb.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -14,16 +14,13 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
 
     abstract fun getLayout(): Int
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(getLayout())
         initComponent(savedInstanceState)
     }
 
-    internal fun addFragment(
-        fragment: Fragment, container: Int, TAG: String,
-        addToBackStack: Boolean
-    ) {
+    fun addFragment(fragment: Fragment, container: Int, TAG: String, addToBackStack: Boolean) {
         supportFragmentManager.beginTransaction().apply {
             add(container, fragment)
             if (addToBackStack) {
@@ -34,10 +31,7 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
         }
     }
 
-    internal fun replaceFragment(
-        fragment: Fragment, container: Int, TAG: String?,
-        addToBackStack: Boolean
-    ) {
+    fun replaceFragment(fragment: Fragment, container: Int, TAG: String?, addToBackStack: Boolean) {
         supportFragmentManager.beginTransaction().apply {
             replace(container, fragment)
             if (addToBackStack) {
@@ -46,5 +40,9 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
             setTransition(FragmentTransaction.TRANSIT_NONE)
             commit()
         }
+    }
+
+    fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
