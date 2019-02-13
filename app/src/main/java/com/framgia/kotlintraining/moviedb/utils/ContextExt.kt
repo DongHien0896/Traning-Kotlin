@@ -7,11 +7,7 @@ import android.net.NetworkInfo
 fun Context.checkNetworkConnection(flagConnectivity: String): Boolean {
     val connectivityManager = getSystemService(flagConnectivity) as ConnectivityManager
     val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
-    if (networkInfo == null) {
-        return false
-    } else {
-        networkInfo.apply {
-            return isConnected
-        }
-    }
+    return if (networkInfo == null) {
+        false
+    } else networkInfo.isConnected
 }
