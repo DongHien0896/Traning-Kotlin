@@ -20,7 +20,7 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
         initComponent(savedInstanceState)
     }
 
-    internal fun addFragment(fragment: Fragment, container: Int, TAG: String, addToBackStack: Boolean) {
+    fun addFragment(fragment: Fragment, container: Int, TAG: String, addToBackStack: Boolean) {
         supportFragmentManager.beginTransaction().apply {
             add(container, fragment)
             if (addToBackStack) {
@@ -31,7 +31,7 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
         }
     }
 
-    internal fun replaceFragment(fragment: Fragment, container: Int, TAG: String?, addToBackStack: Boolean) {
+    fun replaceFragment(fragment: Fragment, container: Int, TAG: String?, addToBackStack: Boolean) {
         supportFragmentManager.beginTransaction().apply {
             replace(container, fragment)
             if (addToBackStack) {
@@ -42,7 +42,7 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
         }
     }
 
-    internal fun showMessage(message: String) {
+    fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
