@@ -14,7 +14,10 @@ abstract class BaseRecyclerAdapter<T>(callBack: DiffUtil.ItemCallback<T>) :
             .build()
     ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ViewDataBinding> {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseViewHolder<ViewDataBinding> {
         return BaseViewHolder(createBinding(viewType = viewType, parent = parent))
     }
 

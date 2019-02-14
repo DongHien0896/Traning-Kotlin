@@ -3,7 +3,6 @@ package com.framgia.kotlintraining.moviedb.screen.main
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.ViewModelProviders
 import com.framgia.kotlintraining.moviedb.R
 import com.framgia.kotlintraining.moviedb.base.BaseActivity
 import com.framgia.kotlintraining.moviedb.screen.favorite.FavoriteFragment
@@ -11,16 +10,19 @@ import com.framgia.kotlintraining.moviedb.screen.home.HomeFragment
 import com.framgia.kotlintraining.moviedb.utils.checkNetworkConnection
 import com.framgia.kotlintraining.moviedb.utils.constant.Constant
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<MainViewModel>() {
 
     override fun getLayout(): Int = R.layout.activity_main
 
+    override val viewModel by viewModel<MainViewModel>()
+
     override fun initComponent(saveInstantState: Bundle?) {
         if (checkNetworkConnection(Context.CONNECTIVITY_SERVICE).not()) {
             showInformationDialog()
         }
-        ViewModelProviders.of(this).get(MainViewModel::class.java).apply {}
+        viewModel.apply {}
         addFragment(
             HomeFragment.newInstance(),
             R.id.frame_container,
