@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentTransaction
 
 abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
 
-    lateinit var viewModel: ViewModel
+    abstract val viewModel: ViewModel
 
     abstract fun initComponent(saveInstantState: Bundle?)
 

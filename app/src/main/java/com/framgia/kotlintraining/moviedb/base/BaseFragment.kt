@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 
 abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> : Fragment() {
 
-    lateinit var viewModel: ViewModel
+    abstract val viewModel: ViewModel
 
     abstract val layoutRes: Int
 
@@ -22,7 +22,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         container: Int,
         TAG: String?,
         addToBackStack: Boolean
-        ) {
+    ) {
         activity?.supportFragmentManager?.beginTransaction()?.apply {
             replace(container, fragment)
             if (addToBackStack) {
@@ -33,8 +33,13 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val viewBinding: ViewBinding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val viewBinding: ViewBinding =
+            DataBindingUtil.inflate(inflater, layoutRes, container, false)
         val view = viewBinding.root
         viewBinding.apply {
             setLifecycleOwner(viewLifecycleOwner)
