@@ -1,12 +1,11 @@
 package com.framgia.kotlintraining.moviedb.data.model
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class MovieResponse(
     @SerializedName("total_pages")
-    var mTotalPages: Int,
+    var mTotalPages: Int? = null,
 
     @SerializedName("results")
-    var mListMovie: List<Movie>
+    var mListMovie: ArrayList<Movie>? = null
 )

@@ -26,10 +26,7 @@ fun createRetrofit(): Retrofit {
         connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
     }
 
-    val gson = GsonBuilder().registerTypeAdapter(
-        Movie::class.java, Movie
-            .DataStateDeserializer
-    ).create()
+    val gson = GsonBuilder().create()
 
     return Retrofit.Builder().baseUrl(Constant.END_POINT_URL)
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
