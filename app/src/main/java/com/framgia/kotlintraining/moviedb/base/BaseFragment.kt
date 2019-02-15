@@ -4,16 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.framgia.kotlintraining.moviedb.BR
 
 abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> : Fragment() {
 
     abstract val viewModel: ViewModel
 
     abstract val layoutRes: Int
+
+    private lateinit var viewBinding: ViewBinding
 
     abstract fun initComponent(viewBinding: ViewBinding)
 
@@ -38,16 +42,31 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val viewBinding: ViewBinding =
-            DataBindingUtil.inflate(inflater, layoutRes, container, false)
-        val view = viewBinding.root
+        viewBinding =
+                DataBindingUtil.inflate(inflater, layoutRes, container, false)
+        return viewBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewBinding.apply {
-            setLifecycleOwner(viewLifecycleOwner)
+            setVariable(BR.viewModel, viewModel)
+            lifecycleOwner = viewLifecycleOwner
+
+
             root.isClickable = true
+            executePendingBindings()
         }
-        initComponent(viewBinding)
         lifecycle.addObserver(viewModel)
-        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initComponent(viewBinding)
+    }
+
+    open fun showMessage(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     open fun onBackPress() {}
