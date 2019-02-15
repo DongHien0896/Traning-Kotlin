@@ -21,9 +21,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     override val viewModel by viewModel<HomeViewModel>()
 
     override fun initComponent(viewBinding: FragmentHomeBinding) {
-        val movieAdapter = MoviePopularAdapter(
-            itemClickListener = { openDetailMovie(it) }
-        )
+        val movieAdapter = MoviePopularAdapter(::openDetailMovie)
         recycler_view.adapter = movieAdapter
 
         viewModel.apply {

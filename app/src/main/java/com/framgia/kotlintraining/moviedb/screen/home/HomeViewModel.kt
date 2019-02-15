@@ -18,8 +18,8 @@ class HomeViewModel constructor(
                     {
                         onLoadSuccess(page, it.mListMovie)
                     },
-                    { threo ->
-                        onLoadFail(threo)
+                    {
+                        onLoadFail(it)
                     }
                 )
         )

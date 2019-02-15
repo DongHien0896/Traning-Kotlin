@@ -51,7 +51,9 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         super.onViewCreated(view, savedInstanceState)
         viewBinding.apply {
             setVariable(BR.viewModel, viewModel)
-            lifecycleOwner = this@BaseFragment
+            lifecycleOwner = viewLifecycleOwner
+
+
             root.isClickable = true
             executePendingBindings()
         }
