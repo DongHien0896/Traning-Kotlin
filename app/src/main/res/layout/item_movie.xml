@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.framgia.kotlintraining.moviedb.data.model.Movie" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_280">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            bind:imageUrl="@{ item.mBackdropPath }"
+            android:src="@mipmap/ic_launcher"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_50"
+            android:gravity="center"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingEnd="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_10"
+            android:singleLine="true"
+            android:text="@{ item.mOriginTitle }"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
