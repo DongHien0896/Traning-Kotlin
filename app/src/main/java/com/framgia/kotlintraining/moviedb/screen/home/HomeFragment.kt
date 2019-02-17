@@ -29,7 +29,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 movieAdapter.submitList(it)
             })
             firsLoad()
-
         }
 
     }

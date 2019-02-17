@@ -42,8 +42,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding =
-                DataBindingUtil.inflate(inflater, layoutRes, container, false)
+        viewBinding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         return viewBinding.root
     }
 
