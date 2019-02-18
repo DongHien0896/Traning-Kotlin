@@ -49,6 +49,7 @@ abstract class BaseLoadMoreRefreshViewModel<Item> : BaseViewModel() {
 
     fun loadMore() {
         loadData(currentPage.value?.plus(1) ?: 1)
+        println(currentPage)
     }
 
     open fun getLoadMoreThreshold() = 3
@@ -68,6 +69,7 @@ abstract class BaseLoadMoreRefreshViewModel<Item> : BaseViewModel() {
         val newList = listItems.value ?: ArrayList()
         newList.addAll(items ?: listOf())
         listItems.value = newList
+
         isLastPage.value = items?.size ?: 0 < getNumberItemPerPage()
         isLoading.value = false
         isRefreshing.value = false

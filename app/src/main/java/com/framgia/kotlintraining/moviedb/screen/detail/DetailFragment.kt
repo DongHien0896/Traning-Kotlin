@@ -13,7 +13,7 @@ class DetailMovieFragment : BaseFragment<FragmentMovieDetailBinding,
 
     companion object {
 
-        const val KEY_MOVIE = "MOVIE"
+        private const val KEY_MOVIE = "MOVIE"
         const val TAG = "MovieDetailFragment"
 
         fun newInstance(movie: Movie) = DetailMovieFragment().apply {
@@ -29,7 +29,11 @@ class DetailMovieFragment : BaseFragment<FragmentMovieDetailBinding,
         get() = R.layout.fragment_movie_detail
 
     override fun initComponent(viewBinding: FragmentMovieDetailBinding) {
-
+        arguments?.apply {
+            getParcelable<Movie>(KEY_MOVIE)?.apply {
+                viewModel.movie.value = this
+            }
+        }
     }
 
 }
