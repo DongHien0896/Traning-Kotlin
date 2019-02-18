@@ -1,11 +1,11 @@
 package com.framgia.kotlintraining.moviedb.utils.widgets
 
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class EndlessRecyclerOnScrollListener(threshold: Int = 3) : RecyclerView.OnScrollListener() {
-    // The total number of items in the dataset after the last load
+abstract class EndlessRecyclerOnScrollListener(threshold: Int = 3) :
+    RecyclerView.OnScrollListener() {
+
     private var mPreviousTotal: Int = 0
     private var isLoading = true
     private var mFirstVisibleItem: Int = 0
@@ -28,9 +28,6 @@ abstract class EndlessRecyclerOnScrollListener(threshold: Int = 3) : RecyclerVie
         if (recycler.layoutManager is LinearLayoutManager) {
             mFirstVisibleItem =
                     (recycler.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-        } else if (recycler.layoutManager is GridLayoutManager) {
-            mFirstVisibleItem =
-                    (recycler.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
         } else {
             throw RuntimeException("Error LayoutManager ")
         }
@@ -40,9 +37,8 @@ abstract class EndlessRecyclerOnScrollListener(threshold: Int = 3) : RecyclerVie
         }
 
         if (!isLoading && mTotalItemCount -
-                mVisibleItemCount <= mFirstVisibleItem + mNumberThreshold
+            mVisibleItemCount <= mFirstVisibleItem + mNumberThreshold
         ) {
-            // End has been reached
             onLoadMore()
             isLoading = true
         }
