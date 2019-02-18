@@ -10,5 +10,5 @@ object Constant {
     const val END_POINT_URL = "https://api.themoviedb.org/3/"
     const val END_POINT_IMAGE_URL = "http://image.tmdb.org/t/p/w185/"
     const val COMA_QUESTION = " = ?"
-    const val PAGE_REQUEST = 1
+    const val FIRST_PAGE = 1
 }

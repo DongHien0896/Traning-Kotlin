@@ -28,8 +28,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             listItems.observe(viewLifecycleOwner, Observer {
                 movieAdapter.submitList(it)
             })
-            firsLoad()
-
+            firstLoad()
         }
 
     }
