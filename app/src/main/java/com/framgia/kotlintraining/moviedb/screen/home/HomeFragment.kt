@@ -5,6 +5,7 @@ import com.framgia.kotlintraining.moviedb.R
 import com.framgia.kotlintraining.moviedb.base.BaseFragment
 import com.framgia.kotlintraining.moviedb.data.model.Movie
 import com.framgia.kotlintraining.moviedb.databinding.FragmentHomeBinding
+import com.framgia.kotlintraining.moviedb.screen.detail.DetailMovieFragment
 import com.framgia.kotlintraining.moviedb.screen.home.adapter.MoviePopularAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -26,7 +27,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         viewModel.apply {
             listItems.observe(viewLifecycleOwner, Observer {
-                movieAdapter.submitList(it)
+                val newList = ArrayList<Movie>()
+                newList.addAll(it)
+                movieAdapter.submitList(newList)
             })
             firstLoad()
         }
@@ -34,6 +37,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     private fun openDetailMovie(movie: Movie) {
-        showMessage("open detail")
+        replaceFragment(
+            fragment = DetailMovieFragment.newInstance(movie),
+            container = R.id.frame_container,
+            TAG = DetailMovieFragment.TAG,
+            addToBackStack = true
+        )
     }
 }

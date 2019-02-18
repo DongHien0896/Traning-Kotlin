@@ -11,8 +11,13 @@ object BindingAdapter {
 
     @BindingAdapter("imageUrl")
     @JvmStatic
-    fun loadImage(imageView: ImageView, imageLink: String) {
-        val path: String = Constant.END_POINT_IMAGE_URL.plus(imageLink)
+    fun loadImage(imageView: ImageView, imageLink: String?) {
+        var path: String = Constant.END_POINT_IMAGE_URL
+        if (imageLink == null) {
+            path += "bOGkgRGdhrBYJSLpXaxhXVstddV.jpg"
+        } else {
+            path += imageLink
+        }
         Glide.with(imageView.context).load(path).into(imageView)
     }
 

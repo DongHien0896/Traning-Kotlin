@@ -9,8 +9,8 @@ import io.reactivex.disposables.Disposable
 abstract class BaseViewModel : LifecycleObserver, ViewModel() {
 
     val isLoading = MutableLiveData<Boolean>().apply { value = false }
-    val errorMessage = MutableLiveData<String>()
-    val compositeDisposable = CompositeDisposable()
+    private val errorMessage = MutableLiveData<String>()
+    private val compositeDisposable = CompositeDisposable()
 
     fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)

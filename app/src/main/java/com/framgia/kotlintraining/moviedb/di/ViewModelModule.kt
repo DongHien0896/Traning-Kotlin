@@ -1,5 +1,6 @@
 package com.framgia.kotlintraining.moviedb.di
 
+import com.framgia.kotlintraining.moviedb.screen.detail.DetailMovieViewModel
 import com.framgia.kotlintraining.moviedb.screen.favorite.FavoriteViewModel
 import com.framgia.kotlintraining.moviedb.screen.home.HomeViewModel
 import com.framgia.kotlintraining.moviedb.screen.main.MainViewModel
@@ -10,4 +11,5 @@ val viewModelModule = module {
     viewModel<HomeViewModel>()
     viewModel<FavoriteViewModel>()
     viewModel<MainViewModel>()
+    viewModel<DetailMovieViewModel>()
 }
