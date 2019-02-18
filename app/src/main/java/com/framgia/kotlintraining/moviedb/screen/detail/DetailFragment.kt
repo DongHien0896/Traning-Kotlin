@@ -29,11 +29,7 @@ class DetailMovieFragment : BaseFragment<FragmentMovieDetailBinding,
         get() = R.layout.fragment_movie_detail
 
     override fun initComponent(viewBinding: FragmentMovieDetailBinding) {
-        arguments?.apply {
-            getParcelable<Movie>(KEY_MOVIE)?.apply {
-                viewModel.movie.value = this
-            }
-        }
+        viewModel.movie.value = arguments?.getParcelable<Movie>(KEY_MOVIE)?.let { it }
     }
 
 }
