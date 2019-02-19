@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.framgia.kotlintraining.moviedb.screen.home.HomeViewModel" />
+            type="com.framgia.kotlintraining.moviedb.base.BaseLoadMoreRefreshViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

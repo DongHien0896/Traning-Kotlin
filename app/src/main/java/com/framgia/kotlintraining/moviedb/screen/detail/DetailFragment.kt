@@ -5,6 +5,7 @@ import com.framgia.kotlintraining.moviedb.R
 import com.framgia.kotlintraining.moviedb.base.BaseFragment
 import com.framgia.kotlintraining.moviedb.data.model.Movie
 import com.framgia.kotlintraining.moviedb.databinding.FragmentMovieDetailBinding
+import kotlinx.android.synthetic.main.fragment_movie_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailMovieFragment : BaseFragment<FragmentMovieDetailBinding,
@@ -30,6 +31,8 @@ class DetailMovieFragment : BaseFragment<FragmentMovieDetailBinding,
 
     override fun initComponent(viewBinding: FragmentMovieDetailBinding) {
         viewModel.movie.value = arguments?.getParcelable<Movie>(KEY_MOVIE)?.let { it }
+        toolbar?.setNavigationOnClickListener {
+            activity?.onBackPressed()
+        }
     }
-
 }

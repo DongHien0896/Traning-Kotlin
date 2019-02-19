@@ -32,7 +32,7 @@ abstract class BaseLoadMoreRefreshViewModel<Item> : BaseViewModel() {
 
     abstract fun loadData(page: Int)
 
-    fun isFirst() = currentPage.value == 0
+    private fun isFirst() = currentPage.value == 0
             && (listItems.value == null || listItems.value?.size == 0)
 
     fun firstLoad() {
@@ -43,7 +43,7 @@ abstract class BaseLoadMoreRefreshViewModel<Item> : BaseViewModel() {
         }
     }
 
-    fun refreshData() {
+    private fun refreshData() {
         loadData(1)
     }
 
@@ -56,7 +56,7 @@ abstract class BaseLoadMoreRefreshViewModel<Item> : BaseViewModel() {
 
     open fun getNumberItemPerPage() = 20
 
-    fun resetLoadMore() {
+    private fun resetLoadMore() {
         onScrollListener.resetOnLoadMore()
         isLastPage.value = false
     }
