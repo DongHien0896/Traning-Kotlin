@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
@@ -34,11 +35,18 @@
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/dp_16">
 
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:navigationIcon="?attr/homeAsUpIndicator"
+                    app:theme="@style/ToolbarTheme" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_300"
-                    tools:scaleType="centerCrop"
                     bind:imageUrl="@{ viewModel.movie.mBackdropPath }"
+                    tools:scaleType="centerCrop"
                     tools:src="@drawable/ic_launcher_foreground" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -78,8 +86,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_16"
-                    android:textColor="@color/white"
                     android:text="Description:"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
 
                 <androidx.appcompat.widget.AppCompatTextView
