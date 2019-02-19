@@ -8,7 +8,7 @@ import com.framgia.kotlintraining.moviedb.data.model.Movie
 import com.framgia.kotlintraining.moviedb.data.source.local.dao.MovieDAO
 
 @Database(entities = [Movie::class], version = 1)
-abstract class MovieDatabase constructor(movieDAO: MovieDAO) : RoomDatabase() {
+abstract class MovieDatabase  : RoomDatabase() {
 
     companion object {
         const val DATABASE_NAME = "moviedbdatabase"

@@ -50,6 +50,7 @@
                     tools:src="@drawable/ic_launcher_foreground" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_favorite"
                     android:layout_width="@dimen/dp_36"
                     android:layout_height="@dimen/dp_36"
                     android:layout_marginStart="@dimen/dp_16"

@@ -17,5 +17,6 @@ class FavoriteFragment : BaseFragment<FragmentRefeshBinding, FavoriteViewModel>(
     override val viewModel by viewModel<FavoriteViewModel>()
 
     override fun initComponent(viewBinding: FragmentRefeshBinding) {
+
     }
 }

@@ -34,5 +34,9 @@ class DetailMovieFragment : BaseFragment<FragmentMovieDetailBinding,
         toolbar?.setNavigationOnClickListener {
             activity?.onBackPressed()
         }
+        button_favorite.setOnClickListener {
+            it.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
+            showMessage("add Favorite")
+        }
     }
 }
