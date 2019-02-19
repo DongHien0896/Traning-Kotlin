@@ -31,7 +31,7 @@ class DetailMovieFragment : BaseFragment<FragmentMovieDetailBinding,
 
     override fun initComponent(viewBinding: FragmentMovieDetailBinding) {
         viewModel.movie.value = arguments?.getParcelable<Movie>(KEY_MOVIE)?.let { it }
-        toolbar!!.setNavigationOnClickListener {
+        toolbar?.setNavigationOnClickListener {
             activity?.onBackPressed()
         }
     }
