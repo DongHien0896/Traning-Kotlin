@@ -24,7 +24,7 @@ class MovieRepositoryImpl constructor(
     //local
     override fun getMovieById(id: String): Single<Movie> = movieDAO.getMovieById(id)
 
-    override fun insertMovie(movie: Movie): Int = movieDAO.insertMovie(movie)
+    override fun insertMovie(movie: Movie): Long = movieDAO.insertMovie(movie)
 
     override fun deleteMovie(movie: Movie): Int = movieDAO.deleteMovie(movie)
 

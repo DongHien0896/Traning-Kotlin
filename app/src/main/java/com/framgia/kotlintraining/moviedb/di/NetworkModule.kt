@@ -1,7 +1,5 @@
 package com.framgia.kotlintraining.moviedb.di
 
-import android.app.Activity
-import com.framgia.kotlintraining.moviedb.data.source.local.db.MovieDatabase
 import com.framgia.kotlintraining.moviedb.data.source.network.Api
 import com.framgia.kotlintraining.moviedb.di.Properties.CONNECTION_TIMEOUT
 import com.framgia.kotlintraining.moviedb.utils.constant.Constant
@@ -18,7 +16,6 @@ import java.util.concurrent.TimeUnit
 val netWorkModule = module {
     single { createRetrofit() }
     single { createApi() }
-    single { createDatabase() }
 }
 
 object Properties {
@@ -58,5 +55,3 @@ fun createLoggingInterceptor(): Interceptor {
     logging.level = HttpLoggingInterceptor.Level.BODY
     return logging
 }
-
-fun createDatabase(): MovieDatabase = MovieDatabase.newInstance(Activity().baseContext)
