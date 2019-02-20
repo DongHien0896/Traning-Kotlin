@@ -26,6 +26,14 @@ abstract class BaseRecyclerAdapter<T>(callBack: DiffUtil.ItemCallback<T>) :
         holder.binding.executePendingBindings()
     }
 
+    override fun submitList(list: MutableList<T>?) {
+        val newList = ArrayList<T>()
+        if (list != null) {
+            newList.addAll(list)
+        }
+        super.submitList(newList)
+    }
+
     protected abstract fun createBinding(parent: ViewGroup, viewType: Int? = 0): ViewDataBinding
 
     protected abstract fun bind(binding: ViewDataBinding, item: T)

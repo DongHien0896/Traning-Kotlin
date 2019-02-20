@@ -49,6 +49,7 @@ fun createRetrofit(): Retrofit {
 }
 
 fun createApi(): Api = createRetrofit().create(Api::class.java)
+
 fun createLoggingInterceptor(): Interceptor {
     val logging = HttpLoggingInterceptor()
     logging.level = HttpLoggingInterceptor.Level.BODY

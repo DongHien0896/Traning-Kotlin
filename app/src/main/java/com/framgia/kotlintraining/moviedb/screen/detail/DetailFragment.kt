@@ -31,8 +31,18 @@ class DetailMovieFragment : BaseFragment<FragmentMovieDetailBinding,
 
     override fun initComponent(viewBinding: FragmentMovieDetailBinding) {
         viewModel.movie.value = arguments?.getParcelable<Movie>(KEY_MOVIE)?.let { it }
+        viewModel.favoriteChanged.value = viewModel.movie.value?.isFavorite
         toolbar?.setNavigationOnClickListener {
             activity?.onBackPressed()
+        }
+        button_favorite.setOnClickListener {
+            viewModel.movie.value?.let {
+                if (it.isFavorite == false) {
+                    viewModel.addMovie(it)
+                } else {
+                    viewModel.deleteMovie(it)
+                }
+            }
         }
     }
 }
