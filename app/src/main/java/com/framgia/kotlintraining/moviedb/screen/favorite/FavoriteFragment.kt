@@ -28,9 +28,7 @@ class FavoriteFragment : BaseFragment<FragmentRefeshBinding, FavoriteViewModel>(
 
         viewModel.apply {
             listItems.observe(viewLifecycleOwner, Observer {
-                val newList = ArrayList<Movie>()
-                newList.addAll(it)
-                movieAdapter.submitList(newList)
+                movieAdapter.submitList(it)
             })
             firstLoad()
         }

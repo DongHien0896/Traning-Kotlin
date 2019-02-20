@@ -37,7 +37,7 @@ class DetailMovieFragment : BaseFragment<FragmentMovieDetailBinding,
         }
         button_favorite.setOnClickListener {
             viewModel.movie.value?.let {
-                if (!it.isFavorite!!) {
+                if (it.isFavorite == false) {
                     viewModel.addMovie(it)
                 } else {
                     viewModel.deleteMovie(it)

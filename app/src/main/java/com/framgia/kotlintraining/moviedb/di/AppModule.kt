@@ -7,10 +7,11 @@ import com.framgia.kotlintraining.moviedb.data.source.repository.MovieRepository
 import com.framgia.kotlintraining.moviedb.data.source.repository.impl.MovieRepositoryImpl
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.module
+import org.koin.experimental.builder.create
 
 val appModule = module {
     single { androidApplication().resources }
-    single<MovieRepository> { MovieRepositoryImpl(get(), get()) }
+    single<MovieRepository> { create<MovieRepositoryImpl>() }
     single { createDatabaseName() }
     single { createAppDatabase(get(), get()) }
     single { createMovieDao(get()) }

@@ -11,7 +11,7 @@ interface MovieRepository {
 
     //local
     fun getListMovie(): Single<List<Movie>>
-    fun getMovieById(id: Int?): Single<Movie>
+    fun getMovieById(id: Int): Single<Movie>
     fun insertMovie(movie: Movie): Long
     fun deleteMovie(movie: Movie): Int
 }

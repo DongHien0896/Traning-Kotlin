@@ -27,9 +27,7 @@ class HomeFragment : BaseFragment<FragmentRefeshBinding, HomeViewModel>() {
 
         viewModel.apply {
             listItems.observe(viewLifecycleOwner, Observer {
-                val newList = ArrayList<Movie>()
-                newList.addAll(it)
-                movieAdapter.submitList(newList)
+                movieAdapter.submitList(it)
             })
             firstLoad()
         }
