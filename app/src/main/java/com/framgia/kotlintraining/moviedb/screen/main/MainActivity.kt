@@ -3,6 +3,7 @@ package com.framgia.kotlintraining.moviedb.screen.main
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.framgia.kotlintraining.moviedb.R
 import com.framgia.kotlintraining.moviedb.base.BaseActivity
 import com.framgia.kotlintraining.moviedb.screen.favorite.FavoriteFragment
@@ -34,16 +35,22 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
 
     private fun setEvenBottomNavigation() {
+        val fragmentFavorite = supportFragmentManager.findFragmentByTag(Constant.TAG_FAVORITE_FRAGMENT)
+            ?: FavoriteFragment.newInstance()
+        val fragmentHome = supportFragmentManager.findFragmentByTag(Constant.TAG_HOME_FRAGMENT)
+            ?: HomeFragment.newInstance()
         navigation_bottom.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.navigation_home -> replaceFragment(
-                    HomeFragment.newInstance(),
-                    R.id.frame_container,
-                    Constant.TAG_HOME_FRAGMENT,
-                    false
-                )
+                R.id.navigation_home -> {
+                    replaceFragment(
+                        fragmentHome,
+                        R.id.frame_container,
+                        Constant.TAG_HOME_FRAGMENT,
+                        false
+                    )
+                }
                 R.id.navigation_favorite -> replaceFragment(
-                    FavoriteFragment.newInstance(),
+                    fragmentFavorite,
                     R.id.frame_container,
                     Constant.TAG_FAVORITE_FRAGMENT,
                     false
