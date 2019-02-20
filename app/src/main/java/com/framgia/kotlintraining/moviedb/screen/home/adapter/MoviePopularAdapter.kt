@@ -15,7 +15,7 @@ class MoviePopularAdapter(
 ) : BaseRecyclerAdapter<Movie>(
     callBack = object : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            return oldItem.mId == newItem.mId
+            return oldItem.mIdMovie == newItem.mIdMovie
         }
 
         override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {

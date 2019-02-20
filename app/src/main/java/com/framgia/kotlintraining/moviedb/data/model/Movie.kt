@@ -12,15 +12,13 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "movie")
 data class Movie(
 
-    @PrimaryKey(autoGenerate = false)
-    var mId: String = "",
-
     @Ignore
     @SerializedName("vote_count")
     var mVoteCount: Int? = null,
 
     @SerializedName("id")
     @ColumnInfo(name = "id")
+    @PrimaryKey
     var mIdMovie: Int? = null,
 
     @SerializedName("original_title")
