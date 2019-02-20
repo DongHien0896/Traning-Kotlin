@@ -1,6 +1,7 @@
 package com.framgia.kotlintraining.moviedb.data.model
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
@@ -19,6 +20,7 @@ data class Movie(
     var mVoteCount: Int? = null,
 
     @SerializedName("id")
+    @ColumnInfo(name = "id")
     var mIdMovie: Int? = null,
 
     @SerializedName("original_title")
@@ -27,7 +29,6 @@ data class Movie(
     @SerializedName("poster_path")
     var mPosterPath: String? = null,
 
-    @Ignore
     @SerializedName("backdrop_path")
     var mBackdropPath: String? = null,
 
@@ -37,5 +38,7 @@ data class Movie(
 
     @Ignore
     @SerializedName("release_date")
-    var mReleaseDate: String? = null
+    var mReleaseDate: String? = null,
+
+    var isFavorite: Boolean? = false
 ) : Parcelable

@@ -1,18 +1,47 @@
 package com.framgia.kotlintraining.moviedb.screen.detail
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.framgia.kotlintraining.moviedb.base.BaseLoadMoreRefreshViewModel
+import com.framgia.kotlintraining.moviedb.base.BaseViewModel
 import com.framgia.kotlintraining.moviedb.data.model.Movie
+import com.framgia.kotlintraining.moviedb.data.source.local.dao.MovieDAO
 import com.framgia.kotlintraining.moviedb.data.source.repository.MovieRepository
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 
 class DetailMovieViewModel constructor(
-    private val movieRepository: MovieRepository
-) : BaseLoadMoreRefreshViewModel<Movie>() {
+    private val movieRepository: MovieRepository,
+    private val movieDao: MovieDAO
+) : BaseViewModel() {
 
     val movie = MutableLiveData<Movie>()
 
-    override fun loadData(page: Int) {
-
+    val favoriteChanged = MutableLiveData<Boolean>().apply {
+        value = false
     }
 
+    fun updateMovie(currentMovie: Movie, msg: String) {
+        val disposable = Observable.just(currentMovie)
+            .subscribeOn(Schedulers.io())
+            .subscribe(
+                {
+                    currentMovie.isFavorite = currentMovie.isFavorite?.not()
+                    favoriteChanged.postValue(currentMovie.isFavorite)
+                    when (msg) {
+                        "delete" -> movieRepository.deleteMovie(currentMovie)
+                        "add" -> movieRepository.insertMovie(currentMovie)
+                    }
+                },
+                { Log.d("DetailViewModel", "${it.message}") }
+            )
+        addDisposable(disposable)
+    }
+
+    fun addMovie(currentMovie: Movie) {
+        updateMovie(currentMovie, "add")
+    }
+
+    fun deleteMovie(currentMovie: Movie) {
+        updateMovie(currentMovie, "delete")
+    }
 }

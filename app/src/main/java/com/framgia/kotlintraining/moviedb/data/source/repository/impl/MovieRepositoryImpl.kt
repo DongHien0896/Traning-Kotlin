@@ -22,7 +22,7 @@ class MovieRepositoryImpl constructor(
     }
 
     //local
-    override fun getMovieById(id: String): Single<Movie> = movieDAO.getMovieById(id)
+    override fun getMovieById(id: Int?): Single<Movie> = movieDAO.getMovieById(id)
 
     override fun insertMovie(movie: Movie): Long = movieDAO.insertMovie(movie)
 

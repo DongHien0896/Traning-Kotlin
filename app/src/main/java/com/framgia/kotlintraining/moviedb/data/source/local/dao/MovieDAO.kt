@@ -10,8 +10,8 @@ interface MovieDAO {
     @Query("SELECT * FROM movie")
     fun getListMovie(): Single<List<Movie>>
 
-    @Query("SELECT * FROM movie WHERE mIdMovie=:id")
-    fun getMovieById(id: String): Single<Movie>
+    @Query("SELECT * FROM movie WHERE id=:id")
+    fun getMovieById(id: Int?): Single<Movie>
 
     @Delete
     fun deleteMovie(movie: Movie): Int
