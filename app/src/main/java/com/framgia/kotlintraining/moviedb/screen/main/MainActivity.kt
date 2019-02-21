@@ -18,36 +18,51 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     override val viewModel by viewModel<MainViewModel>()
 
+    private val fragmentHome = supportFragmentManager.findFragmentByTag(Constant.TAG_HOME_FRAGMENT)
+        ?: HomeFragment.newInstance()
+
     override fun initComponent(saveInstantState: Bundle?) {
         if (checkNetworkConnection(Context.CONNECTIVITY_SERVICE).not()) {
             showInformationDialog()
         }
-        viewModel.apply {}
-        addFragment(
-            HomeFragment.newInstance(),
-            R.id.frame_container,
-            Constant.TAG_HOME_FRAGMENT,
-            false
-        )
+        if (saveInstantState == null) {
+            viewModel.apply {}
+            addFragment(
+                fragmentHome,
+                R.id.frame_container,
+                Constant.TAG_HOME_FRAGMENT,
+                false
+            )
+        }
         setEvenBottomNavigation()
     }
 
-
     private fun setEvenBottomNavigation() {
+        val fragmentFavorite =
+            supportFragmentManager.findFragmentByTag(Constant.TAG_FAVORITE_FRAGMENT)
+                ?: FavoriteFragment.newInstance()
         navigation_bottom.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.navigation_home -> replaceFragment(
-                    HomeFragment.newInstance(),
-                    R.id.frame_container,
-                    Constant.TAG_HOME_FRAGMENT,
-                    false
-                )
-                R.id.navigation_favorite -> replaceFragment(
-                    FavoriteFragment.newInstance(),
-                    R.id.frame_container,
-                    Constant.TAG_FAVORITE_FRAGMENT,
-                    false
-                )
+                R.id.navigation_home -> {
+                    navigation_bottom.menu.getItem(1).isChecked = false
+                    it.isChecked = true
+                    replaceFragment(
+                        fragmentHome,
+                        R.id.frame_container,
+                        Constant.TAG_HOME_FRAGMENT,
+                        false
+                    )
+                }
+                R.id.navigation_favorite -> {
+                    navigation_bottom.menu.getItem(0).isChecked = false
+                    it.isChecked = true
+                    replaceFragment(
+                        fragmentFavorite,
+                        R.id.frame_container,
+                        Constant.TAG_FAVORITE_FRAGMENT,
+                        false
+                    )
+                }
             }
             false
         }

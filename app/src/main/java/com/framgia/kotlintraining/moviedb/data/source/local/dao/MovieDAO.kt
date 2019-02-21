@@ -16,6 +16,6 @@ interface MovieDAO {
     @Delete
     fun deleteMovie(movie: Movie): Int
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     fun insertMovie(movie: Movie): Long
 }

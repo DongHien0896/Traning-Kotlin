@@ -30,7 +30,11 @@ class DetailMovieFragment : BaseFragment<FragmentMovieDetailBinding,
         get() = R.layout.fragment_movie_detail
 
     override fun initComponent(viewBinding: FragmentMovieDetailBinding) {
-        viewModel.movie.value = arguments?.getParcelable<Movie>(KEY_MOVIE)?.let { it }
+        var movieViewModel = arguments?.getParcelable<Movie>(KEY_MOVIE)?.let { it }
+        if (movieViewModel?.mIdMovie != null) {
+            viewModel.getMovieById(movieViewModel.mIdMovie!!)
+        }
+        viewModel.movie.value = movieViewModel
         viewModel.favoriteChanged.value = viewModel.movie.value?.isFavorite
         toolbar?.setNavigationOnClickListener {
             activity?.onBackPressed()
