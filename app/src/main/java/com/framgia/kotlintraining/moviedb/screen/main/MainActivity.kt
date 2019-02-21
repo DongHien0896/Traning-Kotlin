@@ -25,13 +25,15 @@ class MainActivity : BaseActivity<MainViewModel>() {
         if (checkNetworkConnection(Context.CONNECTIVITY_SERVICE).not()) {
             showInformationDialog()
         }
-        viewModel.apply {}
-        addFragment(
-            fragmentHome,
-            R.id.frame_container,
-            Constant.TAG_HOME_FRAGMENT,
-            false
-        )
+        if (saveInstantState == null) {
+            viewModel.apply {}
+            addFragment(
+                fragmentHome,
+                R.id.frame_container,
+                Constant.TAG_HOME_FRAGMENT,
+                false
+            )
+        }
         setEvenBottomNavigation()
     }
 
@@ -39,10 +41,11 @@ class MainActivity : BaseActivity<MainViewModel>() {
         val fragmentFavorite =
             supportFragmentManager.findFragmentByTag(Constant.TAG_FAVORITE_FRAGMENT)
                 ?: FavoriteFragment.newInstance()
-
         navigation_bottom.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
+                    navigation_bottom.menu.getItem(1).isChecked = false
+                    it.isChecked = true
                     replaceFragment(
                         fragmentHome,
                         R.id.frame_container,
@@ -50,12 +53,16 @@ class MainActivity : BaseActivity<MainViewModel>() {
                         false
                     )
                 }
-                R.id.navigation_favorite -> replaceFragment(
-                    fragmentFavorite,
-                    R.id.frame_container,
-                    Constant.TAG_FAVORITE_FRAGMENT,
-                    false
-                )
+                R.id.navigation_favorite -> {
+                    navigation_bottom.menu.getItem(0).isChecked = false
+                    it.isChecked = true
+                    replaceFragment(
+                        fragmentFavorite,
+                        R.id.frame_container,
+                        Constant.TAG_FAVORITE_FRAGMENT,
+                        false
+                    )
+                }
             }
             false
         }
