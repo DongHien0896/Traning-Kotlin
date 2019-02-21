@@ -43,7 +43,7 @@ abstract class BaseLoadMoreRefreshViewModel<Item> : BaseViewModel() {
         }
     }
 
-    private fun refreshData() {
+    fun refreshData() {
         loadData(1)
     }
 

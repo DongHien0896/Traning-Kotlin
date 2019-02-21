@@ -15,14 +15,17 @@ class FavoriteViewModel constructor(
     }
 
     override fun loadData(page: Int) {
-        addDisposable(movieDAO.getListMovie()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                onLoadSuccess(page, it)
-            }, {
-                onLoadFail(it)
-            })
+        addDisposable(
+            movieDAO.getListMovie()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    onLoadSuccess(page, it)
+                }, {
+                    onLoadFail(it)
+                })
         )
     }
+
+
 }

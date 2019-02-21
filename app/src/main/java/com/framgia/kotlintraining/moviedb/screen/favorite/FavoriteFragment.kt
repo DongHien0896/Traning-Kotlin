@@ -34,6 +34,11 @@ class FavoriteFragment : BaseFragment<FragmentRefeshBinding, FavoriteViewModel>(
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshData()
+    }
+
     private fun openDetailMovie(movie: Movie) {
         replaceFragment(
             fragment = DetailMovieFragment.newInstance(movie),
