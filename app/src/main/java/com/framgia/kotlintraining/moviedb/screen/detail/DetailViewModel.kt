@@ -23,7 +23,6 @@ class DetailMovieViewModel constructor(
             .subscribe {
                 when (even) {
                     EvenDatabase.DELETE -> {
-                        currentMovie.isFavorite = false
                         favoriteChanged.postValue(false)
                         movieRepository.deleteMovie(currentMovie)
                     }
