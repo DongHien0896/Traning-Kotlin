@@ -43,7 +43,7 @@ class DetailMovieFragment : BaseFragment<FragmentMovieDetailBinding,
             viewModel.movie.value?.let {
                 if (it.isFavorite == false) {
                     viewModel.addMovie(it)
-                    
+
                 } else {
                     viewModel.deleteMovie(it)
 

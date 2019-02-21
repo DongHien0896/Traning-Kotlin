@@ -21,11 +21,17 @@ class DetailMovieViewModel constructor(
         val disposable = Observable.just(currentMovie)
             .subscribeOn(Schedulers.io())
             .subscribe {
-                currentMovie.isFavorite = currentMovie.isFavorite?.not()
-                favoriteChanged.postValue(currentMovie.isFavorite)
                 when (even) {
-                    EvenDatabase.DELETE -> movieRepository.deleteMovie(currentMovie)
-                    EvenDatabase.ADD -> movieRepository.insertMovie(currentMovie)
+                    EvenDatabase.DELETE -> {
+                        currentMovie.isFavorite = false
+                        favoriteChanged.postValue(false)
+                        movieRepository.deleteMovie(currentMovie)
+                    }
+                    EvenDatabase.ADD -> {
+                        currentMovie.isFavorite = true
+                        favoriteChanged.postValue(true)
+                        movieRepository.insertMovie(currentMovie)
+                    }
                 }
             }
         addDisposable(disposable)
@@ -48,7 +54,8 @@ class DetailMovieViewModel constructor(
                     movie.value = it
                     favoriteChanged.value = it.isFavorite
                 }, {
-                    return@subscribe
+                    movie.value?.isFavorite = false
+                    favoriteChanged.value = false
                 })
         )
     }
