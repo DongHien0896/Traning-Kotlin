@@ -3,7 +3,6 @@ package com.framgia.kotlintraining.moviedb.data.model
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -12,7 +11,6 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "movie")
 data class Movie(
 
-    @Ignore
     @SerializedName("vote_count")
     var mVoteCount: Int? = null,
 
@@ -30,11 +28,9 @@ data class Movie(
     @SerializedName("backdrop_path")
     var mBackdropPath: String? = null,
 
-    @Ignore
     @SerializedName("overview")
     var mOverview: String? = null,
 
-    @Ignore
     @SerializedName("release_date")
     var mReleaseDate: String? = null,
 

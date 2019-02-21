@@ -3,22 +3,21 @@ package com.framgia.kotlintraining.moviedb.screen.detail
 import androidx.lifecycle.MutableLiveData
 import com.framgia.kotlintraining.moviedb.base.BaseViewModel
 import com.framgia.kotlintraining.moviedb.data.model.Movie
-import com.framgia.kotlintraining.moviedb.data.source.local.dao.MovieDAO
 import com.framgia.kotlintraining.moviedb.data.source.repository.MovieRepository
 import com.framgia.kotlintraining.moviedb.utils.constant.EvenDatabase
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class DetailMovieViewModel constructor(
-    private val movieRepository: MovieRepository,
-    private val movieDao: MovieDAO
+    private val movieRepository: MovieRepository
 ) : BaseViewModel() {
 
     val movie = MutableLiveData<Movie>()
 
     val favoriteChanged = MutableLiveData<Boolean>().apply { value = false }
 
-    fun updateMovie(currentMovie: Movie, even: EvenDatabase) {
+    private fun updateMovie(currentMovie: Movie, even: EvenDatabase) {
         val disposable = Observable.just(currentMovie)
             .subscribeOn(Schedulers.io())
             .subscribe {
@@ -38,5 +37,19 @@ class DetailMovieViewModel constructor(
 
     fun deleteMovie(currentMovie: Movie) {
         updateMovie(currentMovie, EvenDatabase.DELETE)
+    }
+
+    fun getMovieById(id: Int) {
+        addDisposable(
+            movieRepository.getMovieById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    movie.value = it
+                    favoriteChanged.value = it.isFavorite
+                }, {
+                    return@subscribe
+                })
+        )
     }
 }
