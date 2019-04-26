@@ -9,6 +9,10 @@
         <variable
             name="item"
             type="com.framgia.kotlintraining.moviedb.data.model.Movie" />
+
+        <variable
+            name="adapter"
+            type="com.framgia.kotlintraining.moviedb.screen.home.adapter.MoviePopularAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            bind:imageUrl="@{ item.mBackdropPath }"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/ic_launcher"
+            bind:imageUrl="@{ item.mBackdropPath }" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"

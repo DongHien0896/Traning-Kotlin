@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.framgia.kotlintraining.moviedb.R
 import com.framgia.kotlintraining.moviedb.base.BaseActivity
-import com.framgia.kotlintraining.moviedb.screen.favorite.FavoriteFragment
+import com.framgia.kotlintraining.moviedb.pagingsample.main.PagingDbFragment
 import com.framgia.kotlintraining.moviedb.screen.home.HomeFragment
 import com.framgia.kotlintraining.moviedb.utils.checkNetworkConnection
 import com.framgia.kotlintraining.moviedb.utils.constant.Constant
@@ -38,9 +38,13 @@ class MainActivity : BaseActivity<MainViewModel>() {
     }
 
     private fun setEvenBottomNavigation() {
-        val fragmentFavorite =
-            supportFragmentManager.findFragmentByTag(Constant.TAG_FAVORITE_FRAGMENT)
-                ?: FavoriteFragment.newInstance()
+//        val fragmentFavorite =
+//            supportFragmentManager.findFragmentByTag(Constant.TAG_FAVORITE_FRAGMENT)
+//                ?: FavoriteFragment.newInstance()
+
+        val fragmentDbFragment =
+            supportFragmentManager.findFragmentByTag(Constant.TAG_PAGING_DB_FRAGMENT)
+                ?: PagingDbFragment.newInstance(application)
         navigation_bottom.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
@@ -53,16 +57,28 @@ class MainActivity : BaseActivity<MainViewModel>() {
                         false
                     )
                 }
-                R.id.navigation_favorite -> {
+//                R.id.navigation_favorite -> {
+//                    navigation_bottom.menu.getItem(0).isChecked = false
+//                    it.isChecked = true
+//                    replaceFragment(
+//                        fragmentFavorite,
+//                        R.id.frame_container,
+//                        Constant.TAG_FAVORITE_FRAGMENT,
+//                        false
+//                    )
+//                }
+
+                R.id.navigation_paging_db -> {
                     navigation_bottom.menu.getItem(0).isChecked = false
                     it.isChecked = true
                     replaceFragment(
-                        fragmentFavorite,
+                        fragmentDbFragment,
                         R.id.frame_container,
                         Constant.TAG_FAVORITE_FRAGMENT,
                         false
                     )
                 }
+
             }
             false
         }

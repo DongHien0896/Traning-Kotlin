@@ -1,6 +1,8 @@
 package com.framgia.kotlintraining.moviedb.utils.binding
 
+import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -27,4 +29,9 @@ fun SwipeRefreshLayout.refreshing(refreshing: Boolean?) {
 @BindingAdapter("onScrollListener")
 fun RecyclerView.scrollListener(listener: RecyclerView.OnScrollListener?) {
     if (listener != null) addOnScrollListener(listener)
+}
+
+@BindingAdapter("onClick")
+fun onClick(view: View, listener: View.OnClickListener) {
+    view.setOnClickListener(listener)
 }

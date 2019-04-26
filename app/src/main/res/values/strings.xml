@@ -2,8 +2,13 @@
     <string name="app_name">MovieDB</string>
     <string name="title_home">Home</string>
     <string name="title_favorite">Favorite</string>
+    <string name="title_paging_db">PagingDb</string>
+    <string name="title_paging_item_key">PagingItemKey</string>
+    <string name="title_paging_page_key">PagingPageKey</string>
 
     <string name="msg_no_network">No internet connected!</string>
     <string name="title_oops">Oop!</string>
     <string name="title_try_again">Please, try again!</string>
+    <string name="paging_example">Paging example</string>
+    <string name="paging_with_network">Paging with network</string>
 </resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <data>
+
+        <variable
+            name="viewHolder"
+            type="com.framgia.kotlintraining.moviedb.pagingsample.CheeseAdapter.CheeseViewHolder" />
+
+        <variable
+            name="cheese"
+            type="com.framgia.kotlintraining.moviedb.pagingsample.Cheese" />
+    </data>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_36"
+        android:textColor="@color/black_50"
+        android:text="@{cheese.name}" />
+
+</layout>

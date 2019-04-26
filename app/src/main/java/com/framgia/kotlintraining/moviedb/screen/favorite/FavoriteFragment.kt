@@ -13,7 +13,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class FavoriteFragment : BaseFragment<FragmentRefeshBinding, FavoriteViewModel>() {
 
     companion object {
-        const val TAG = "FavoriteFragment"
         fun newInstance() = FavoriteFragment()
     }
 
