@@ -8,7 +8,7 @@ buildscript {
     ext.rxJavaVersion = '2.2.0'
     ext.rxAndroidVersion = '2.1.0'
     ext.rxAdapterVersion = '2.4.0'
-    ext.glideVersion='4.8.0'
+    ext.glideVersion='4.9.0'
     ext.arch = '1.1.1'
     ext.supportDesign = '1.0.0'
     ext.koin_version = '1.0.2'

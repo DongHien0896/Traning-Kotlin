@@ -9,6 +9,7 @@ import com.framgia.kotlintraining.moviedb.R
 import com.framgia.kotlintraining.moviedb.base.BaseRecyclerAdapter
 import com.framgia.kotlintraining.moviedb.data.model.Movie
 import com.framgia.kotlintraining.moviedb.databinding.ItemMovieBinding
+import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MoviePopularAdapter(
     private val itemClickListener: ((Movie) -> Unit)? = null
@@ -36,6 +37,7 @@ class MoviePopularAdapter(
         }
 
     override fun bind(binding: ViewDataBinding, item: Movie) {
-        if (binding is ItemMovieBinding) binding.item = item
+        if (binding is ItemMovieBinding)
+            binding.item = item
     }
 }

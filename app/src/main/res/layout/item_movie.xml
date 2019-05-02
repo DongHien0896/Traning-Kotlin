@@ -20,6 +20,7 @@
         android:layout_height="@dimen/dp_280">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backdrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
