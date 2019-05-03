@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import com.framgia.kotlintraining.moviedb.R
 import com.framgia.kotlintraining.moviedb.base.BaseActivity
 import com.framgia.kotlintraining.moviedb.pagingsample.main.PagingDbFragment
+import com.framgia.kotlintraining.moviedb.pagingwithnetworksample.byItem.ui.PagingByItemFragment
 import com.framgia.kotlintraining.moviedb.screen.home.HomeFragment
 import com.framgia.kotlintraining.moviedb.utils.checkNetworkConnection
 import com.framgia.kotlintraining.moviedb.utils.constant.Constant
@@ -45,10 +46,15 @@ class MainActivity : BaseActivity<MainViewModel>() {
         val fragmentDbFragment =
             supportFragmentManager.findFragmentByTag(Constant.TAG_PAGING_DB_FRAGMENT)
                 ?: PagingDbFragment.newInstance(application)
+        val fragmentPagingByitem =
+            supportFragmentManager.findFragmentByTag(Constant.TAG_PAGING_BY_ITEM)
+                ?: PagingByItemFragment.newInstance()
+
         navigation_bottom.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
                     navigation_bottom.menu.getItem(1).isChecked = false
+                    navigation_bottom.menu.getItem(2).isChecked = false
                     it.isChecked = true
                     replaceFragment(
                         fragmentHome,
@@ -70,6 +76,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
                 R.id.navigation_paging_db -> {
                     navigation_bottom.menu.getItem(0).isChecked = false
+                    navigation_bottom.menu.getItem(2).isChecked = false
                     it.isChecked = true
                     replaceFragment(
                         fragmentDbFragment,
@@ -79,6 +86,17 @@ class MainActivity : BaseActivity<MainViewModel>() {
                     )
                 }
 
+                R.id.navigation_paging_item_key -> {
+                    navigation_bottom.menu.getItem(0).isChecked = false
+                    navigation_bottom.menu.getItem(1).isChecked = false
+                    it.isChecked = true
+                    replaceFragment(
+                        fragmentPagingByitem,
+                        R.id.frame_container,
+                        Constant.TAG_PAGING_BY_ITEM,
+                        false
+                    )
+                }
             }
             false
         }

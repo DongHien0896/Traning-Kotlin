@@ -1,5 +1,6 @@
 package com.framgia.kotlintraining.moviedb.di
 
+import com.framgia.kotlintraining.moviedb.pagingwithnetworksample.byItem.ui.RedditVewModel
 import com.framgia.kotlintraining.moviedb.screen.detail.DetailMovieViewModel
 import com.framgia.kotlintraining.moviedb.screen.favorite.FavoriteViewModel
 import com.framgia.kotlintraining.moviedb.screen.home.HomeViewModel
@@ -12,4 +13,5 @@ val viewModelModule = module {
     viewModel<FavoriteViewModel>()
     viewModel<MainViewModel>()
     viewModel<DetailMovieViewModel>()
+    viewModel<RedditVewModel>()
 }

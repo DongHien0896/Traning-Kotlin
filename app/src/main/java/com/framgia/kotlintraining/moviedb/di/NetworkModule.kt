@@ -28,7 +28,7 @@ fun createRetrofit(): Retrofit {
         var request = chain.request()
         val url = request
             .url()
-            .newBuilder().addQueryParameter(Constant.PARAM_KEY, Constant.KEY)
+            .newBuilder()
             .build()
         request = request.newBuilder().url(url).build()
         chain.proceed(request)

@@ -13,4 +13,5 @@ object Constant {
     const val COMA_QUESTION = " = ?"
     const val FIRST_PAGE = 1
     val TAG_PAGING_DB_FRAGMENT: String? = "PagingDbFragment"
+    val TAG_PAGING_BY_ITEM: String? = "PagingByItemFragment"
 }
