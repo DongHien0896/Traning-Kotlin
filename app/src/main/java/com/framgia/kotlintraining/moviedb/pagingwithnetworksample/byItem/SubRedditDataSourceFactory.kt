@@ -13,6 +13,7 @@ class SubRedditDataSourceFactory(
 ) : DataSource.Factory<String, RedditPost>() {
 
     val sourceLiveData = MutableLiveData<ItemKeyedSubredditDataSource>()
+
     override fun create(): DataSource<String, RedditPost> {
         val source = ItemKeyedSubredditDataSource(repository, subRedditName, retryExecutor)
         sourceLiveData.postValue(source)

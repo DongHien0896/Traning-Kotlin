@@ -1,31 +1,28 @@
-package com.framgia.kotlintraining.moviedb.pagingwithnetworksample.byItem
+package com.framgia.kotlintraining.moviedb.pagingwithnetworksample.byPage
 
 import androidx.lifecycle.Transformations
 import androidx.paging.Config
 import androidx.paging.toLiveData
 import com.framgia.kotlintraining.moviedb.data.model.Listing
-import com.framgia.kotlintraining.moviedb.data.model.RedditPost
-import com.framgia.kotlintraining.moviedb.data.source.repository.RedditPostRepository
+import com.framgia.kotlintraining.moviedb.data.model.Movie
+import com.framgia.kotlintraining.moviedb.data.source.repository.MovieRepository
 import java.util.concurrent.Executor
 
-class InMemoryByItemRepository(
-    private val redditPostRepository: RedditPostRepository,
-    private val networkExecutor: Executor
+class MovieByPageRepository(
+    private val repository: MovieRepository,
+    private val executor: Executor
 ) {
+    private lateinit var sourceFactory: MovieDataSourceFactory
 
-    private lateinit var sourceFactory: SubRedditDataSourceFactory
-
-
-    fun postsOfSubreddit(subReddit: String, pageSize: Int): Listing<RedditPost> {
-        sourceFactory =
-            SubRedditDataSourceFactory(redditPostRepository, subReddit, networkExecutor)
+    fun getMovie(pageSize: Int): Listing<Movie> {
+        sourceFactory = MovieDataSourceFactory(repository, executor)
 
         val livePagedList = sourceFactory.toLiveData(
             config = Config(
                 pageSize = pageSize,
                 enablePlaceholders = false
             ),
-            fetchExecutor = networkExecutor
+            fetchExecutor = executor
         )
 
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {

@@ -8,7 +8,7 @@ import com.framgia.kotlintraining.moviedb.data.source.repository.RedditPostRepos
 import com.framgia.kotlintraining.moviedb.pagingwithnetworksample.byItem.InMemoryByItemRepository
 import java.util.concurrent.Executor
 
-class RedditVewModel(private val repository: RedditPostRepository) : BaseViewModel(){
+class RedditVewModel(repository: RedditPostRepository) : BaseViewModel() {
 
     private val networkExecutor = Executor { command -> command.run() }
     private val byItemRepository = InMemoryByItemRepository(repository, networkExecutor)
