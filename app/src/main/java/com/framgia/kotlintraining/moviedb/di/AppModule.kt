@@ -8,13 +8,12 @@ import com.framgia.kotlintraining.moviedb.data.source.repository.RedditPostRepos
 import com.framgia.kotlintraining.moviedb.data.source.repository.impl.MovieRepositoryImpl
 import com.framgia.kotlintraining.moviedb.data.source.repository.impl.RedditPostRepositoryImpl
 import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.module
-import org.koin.experimental.builder.create
+import org.koin.dsl.module
 
 val appModule = module {
     single { androidApplication().resources }
-    single<MovieRepository> { create<MovieRepositoryImpl>() }
-    single<RedditPostRepository> {create<RedditPostRepositoryImpl>()}
+    single<MovieRepository> { MovieRepositoryImpl(get(), get()) }
+    single<RedditPostRepository> { RedditPostRepositoryImpl(get()) }
     single { createDatabaseName() }
     single { createAppDatabase(get(), get()) }
     single { createMovieDao(get()) }
