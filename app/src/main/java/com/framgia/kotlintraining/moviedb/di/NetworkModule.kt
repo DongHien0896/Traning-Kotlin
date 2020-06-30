@@ -2,7 +2,7 @@ package com.framgia.kotlintraining.moviedb.di
 
 import com.framgia.kotlintraining.moviedb.data.source.network.Api
 import com.framgia.kotlintraining.moviedb.di.Properties.CONNECTION_TIMEOUT
-import com.framgia.kotlintraining.moviedb.utils.constant.Constant
+import com.framgia.kotlintraining.moviedb.utils.constant.Constants
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -41,7 +41,7 @@ fun createRetrofit(): Retrofit {
 
     val gson = GsonBuilder().create()
 
-    return Retrofit.Builder().baseUrl(Constant.END_POINT_URL)
+    return Retrofit.Builder().baseUrl(Constants.END_POINT_URL)
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient.build())

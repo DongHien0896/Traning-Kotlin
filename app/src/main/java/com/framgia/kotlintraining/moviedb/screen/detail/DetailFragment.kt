@@ -40,15 +40,16 @@ class DetailMovieFragment : BaseFragment<FragmentMovieDetailBinding,
             activity?.onBackPressed()
         }
         button_favorite.setOnClickListener {
-            viewModel.movie.value?.let {
-                if (it.isFavorite == false) {
-                    viewModel.addMovie(it)
-
-                } else {
-                    viewModel.deleteMovie(it)
-
-                }
-            }
+//            viewModel.movie.value?.let {
+//                if (it.isFavorite == false) {
+//                    viewModel.addMovie(it)
+//
+//                } else {
+//                    viewModel.deleteMovie(it)
+//
+//                }
+//            }
+            throw RuntimeException("Test Crash")
         }
     }
 }

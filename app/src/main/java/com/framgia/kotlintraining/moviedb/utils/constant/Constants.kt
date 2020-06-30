@@ -1,7 +1,10 @@
 package com.framgia.kotlintraining.moviedb.utils.constant
 
-object Constant {
+object Constants {
 
+    const val BODY: String = "body"
+    const val TITLE: String = "title"
+    const val NAME: String = "name"
     const val TAG_HOME_FRAGMENT: String = "HomeFragment"
     const val TAG_FAVORITE_FRAGMENT: String = "FavoriteFragment"
     const val TAG_CHEESE_FRAGMENT: String = "CheeseFragment"

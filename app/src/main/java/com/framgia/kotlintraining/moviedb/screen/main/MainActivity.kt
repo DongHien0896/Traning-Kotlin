@@ -1,8 +1,12 @@
 package com.framgia.kotlintraining.moviedb.screen.main
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import androidx.databinding.library.BuildConfig
 import com.framgia.kotlintraining.moviedb.R
 import com.framgia.kotlintraining.moviedb.base.BaseActivity
 import com.framgia.kotlintraining.moviedb.pagingsample.main.PagingDbFragment
@@ -10,7 +14,9 @@ import com.framgia.kotlintraining.moviedb.pagingwithnetworksample.byItem.ui.Pagi
 import com.framgia.kotlintraining.moviedb.pagingwithnetworksample.byPage.ui.PagingByPageKeyFragment
 import com.framgia.kotlintraining.moviedb.screen.home.HomeFragment
 import com.framgia.kotlintraining.moviedb.utils.checkNetworkConnection
-import com.framgia.kotlintraining.moviedb.utils.constant.Constant
+import com.framgia.kotlintraining.moviedb.utils.constant.Constants
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -20,7 +26,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     override val viewModel by viewModel<MainViewModel>()
 
-    private val fragmentHome = supportFragmentManager.findFragmentByTag(Constant.TAG_HOME_FRAGMENT)
+    private val fragmentHome = supportFragmentManager.findFragmentByTag(Constants.TAG_HOME_FRAGMENT)
         ?: HomeFragment.newInstance()
 
     override fun initComponent(saveInstantState: Bundle?) {
@@ -32,7 +38,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
             addFragment(
                 fragmentHome,
                 R.id.frame_container,
-                Constant.TAG_HOME_FRAGMENT,
+                Constants.TAG_HOME_FRAGMENT,
                 false
             )
         }
@@ -45,12 +51,12 @@ class MainActivity : BaseActivity<MainViewModel>() {
 //                ?: FavoriteFragment.newInstance()
 
         val fragmentDbFragment =
-            supportFragmentManager.findFragmentByTag(Constant.TAG_PAGING_DB_FRAGMENT)
+            supportFragmentManager.findFragmentByTag(Constants.TAG_PAGING_DB_FRAGMENT)
                 ?: PagingDbFragment.newInstance(application)
         val fragmentPagingByitem =
-            supportFragmentManager.findFragmentByTag(Constant.TAG_PAGING_BY_ITEM)
+            supportFragmentManager.findFragmentByTag(Constants.TAG_PAGING_BY_ITEM)
                 ?: PagingByItemFragment.newInstance()
-        val fragmentPage = supportFragmentManager.findFragmentByTag(Constant.TAG_PAGING_BY_PAGE)
+        val fragmentPage = supportFragmentManager.findFragmentByTag(Constants.TAG_PAGING_BY_PAGE)
             ?: PagingByPageKeyFragment.newInstance()
 
         navigation_bottom.setOnNavigationItemSelectedListener {
@@ -63,7 +69,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
                     replaceFragment(
                         fragmentHome,
                         R.id.frame_container,
-                        Constant.TAG_HOME_FRAGMENT,
+                        Constants.TAG_HOME_FRAGMENT,
                         false
                     )
                 }
@@ -86,7 +92,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
                     replaceFragment(
                         fragmentDbFragment,
                         R.id.frame_container,
-                        Constant.TAG_FAVORITE_FRAGMENT,
+                        Constants.TAG_FAVORITE_FRAGMENT,
                         false
                     )
                 }
@@ -99,7 +105,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
                     replaceFragment(
                         fragmentPagingByitem,
                         R.id.frame_container,
-                        Constant.TAG_PAGING_BY_ITEM,
+                        Constants.TAG_PAGING_BY_ITEM,
                         false
                     )
                 }
@@ -111,7 +117,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
                     replaceFragment(
                         fragmentPage,
                         R.id.frame_container,
-                        Constant.TAG_PAGING_BY_PAGE,
+                        Constants.TAG_PAGING_BY_PAGE,
                         false
                     )
                 }
@@ -128,5 +134,44 @@ class MainActivity : BaseActivity<MainViewModel>() {
             .setPositiveButton(getString(R.string.title_try_again)) { dialog, _ -> dialog.dismiss() }
             .create()
             .show()
+    }
+
+    private fun getDynamicLinks() {
+        FirebaseDynamicLinks.getInstance()
+            .getDynamicLink(intent)
+            .addOnSuccessListener(this) { pendingDynamicLinkData ->
+                var deepLink: Uri? = null
+                if (pendingDynamicLinkData != null) {
+                    deepLink = pendingDynamicLinkData.link
+                }
+                if (deepLink != null) {
+                    if (BuildConfig.VERSION_CODE < pendingDynamicLinkData.minimumAppVersion) {
+                        //to the Play Store to upgrade the app.
+                        startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+                            )
+                        )
+                    } else {
+                        Log.d("MainActivity", "getDynamicLinks: ")
+                    }
+                }
+            }
+            .addOnFailureListener(OnFailureListener {
+                Log.d("MainActivity", "getDynamicLinks: ${it.message}")
+            })
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        intent?.run {
+            // handle Intent notification
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        intent
     }
 }

@@ -11,4 +11,6 @@
     <string name="title_try_again">Please, try again!</string>
     <string name="paging_example">Paging example</string>
     <string name="paging_with_network">Paging with network</string>
+    <string name="default_notification_channel_id">Movie_DB</string>
+    <string name="notification_channel">Notification_chanel</string>
 </resources>

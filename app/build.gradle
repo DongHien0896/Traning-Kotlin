@@ -8,6 +8,10 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'com.google.firebase.crashlytics'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -89,4 +93,10 @@ dependencies {
     //paging:
     implementation 'android.arch.paging:runtime:1.0.1'
     implementation 'androidx.paging:paging-runtime-ktx:2.1.0'
+
+    //firebase:
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta03'
+    implementation 'com.google.firebase:firebase-analytics:17.3.0'
+    implementation 'com.google.firebase:firebase-dynamic-links:19.1.0'
+    implementation 'com.google.firebase:firebase-messaging:20.2.0'
 }

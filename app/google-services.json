@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "717136695307",
+    "firebase_url": "https://moviedb-c1a00.firebaseio.com",
+    "project_id": "moviedb-c1a00",
+    "storage_bucket": "moviedb-c1a00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717136695307:android:f391ba8de7f5225d5cb70e",
+        "android_client_info": {
+          "package_name": "com.framgia.kotlintraining.moviedb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717136695307-frcfpvhhr1p1nmrlouun8c0ieq78ou43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBehzlu_yCbgYN6o_77B0ynylFePGXSJso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717136695307-frcfpvhhr1p1nmrlouun8c0ieq78ou43.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

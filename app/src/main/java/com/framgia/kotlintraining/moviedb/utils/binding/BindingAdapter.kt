@@ -2,16 +2,15 @@ package com.framgia.kotlintraining.moviedb.utils.binding
 
 import android.view.View
 import android.widget.ImageView
-import androidx.appcompat.widget.AppCompatButton
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
-import com.framgia.kotlintraining.moviedb.utils.constant.Constant
+import com.framgia.kotlintraining.moviedb.utils.constant.Constants
 
 @BindingAdapter("imageUrl")
 fun loadImage(imageView: ImageView, imageLink: String?) {
-    var path: String = Constant.END_POINT_IMAGE_URL
+    var path: String = Constants.END_POINT_IMAGE_URL
     path += imageLink ?: "bOGkgRGdhrBYJSLpXaxhXVstddV.jpg"
     Glide.with(imageView.context).load(path).into(imageView)
 }

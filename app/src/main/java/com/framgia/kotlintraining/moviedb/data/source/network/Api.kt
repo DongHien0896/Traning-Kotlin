@@ -2,9 +2,7 @@ package com.framgia.kotlintraining.moviedb.data.source.network
 
 import com.framgia.kotlintraining.moviedb.data.model.MovieResponse
 import io.reactivex.Single
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface Api {
 
@@ -23,4 +21,10 @@ interface Api {
         @Query("after") after: String,
         @Query("limit") limit: Int
     ): Single<RedditApi.ListingResponse>
+
+    @PUT("user/device")
+    @FormUrlEncoded
+    fun registerDeviceToken(
+        @Field("fcm_token") token: String
+    ): Single<String>
 }
