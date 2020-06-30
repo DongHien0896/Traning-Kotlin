@@ -15,10 +15,14 @@ import com.framgia.kotlintraining.moviedb.pagingwithnetworksample.byPage.ui.Pagi
 import com.framgia.kotlintraining.moviedb.screen.home.HomeFragment
 import com.framgia.kotlintraining.moviedb.utils.checkNetworkConnection
 import com.framgia.kotlintraining.moviedb.utils.constant.Constants
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.util.*
 
 class MainActivity : BaseActivity<MainViewModel>() {
 
@@ -136,6 +140,23 @@ class MainActivity : BaseActivity<MainViewModel>() {
             .show()
     }
 
+    override fun onResume() {
+        super.onResume()
+        registrationToken()
+    }
+
+    private fun registrationToken() {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    return@OnCompleteListener
+                }
+                // Get new Instance ID token
+                val token = Objects.requireNonNull<InstanceIdResult>(task.result).token
+                Log.d("-------->", "MainActivity - registrationToken: $token")
+            })
+    }
+
     private fun getDynamicLinks() {
         FirebaseDynamicLinks.getInstance()
             .getDynamicLink(intent)
@@ -166,12 +187,22 @@ class MainActivity : BaseActivity<MainViewModel>() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         intent?.run {
-            // handle Intent notification
+            if (intent.hasExtra(Constants.TITLE)) {
+                Log.d("-------->", "onNewIntent: has title")
+            }
+            if (intent.hasExtra(Constants.NAME)) {
+                Log.d("-------->", "onNewIntent: has name")
+            }
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        intent
+        if (intent.hasExtra(Constants.TITLE)) {
+            Log.d("-------->", "onCreate: has title")
+        }
+        if (intent.hasExtra(Constants.NAME)) {
+            Log.d("-------->", "MainActivity - onCreate: has name")
+        }
     }
 }
