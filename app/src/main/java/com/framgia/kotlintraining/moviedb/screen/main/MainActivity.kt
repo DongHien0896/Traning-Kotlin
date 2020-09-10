@@ -12,6 +12,8 @@ import com.framgia.kotlintraining.moviedb.base.BaseActivity
 import com.framgia.kotlintraining.moviedb.pagingsample.main.PagingDbFragment
 import com.framgia.kotlintraining.moviedb.pagingwithnetworksample.byItem.ui.PagingByItemFragment
 import com.framgia.kotlintraining.moviedb.pagingwithnetworksample.byPage.ui.PagingByPageKeyFragment
+import com.framgia.kotlintraining.moviedb.screen.favorite.FavoriteFragment
+import com.framgia.kotlintraining.moviedb.screen.firestore.FirestoreFragment
 import com.framgia.kotlintraining.moviedb.screen.home.HomeFragment
 import com.framgia.kotlintraining.moviedb.utils.checkNetworkConnection
 import com.framgia.kotlintraining.moviedb.utils.constant.Constants
@@ -50,10 +52,9 @@ class MainActivity : BaseActivity<MainViewModel>() {
     }
 
     private fun setEvenBottomNavigation() {
-//        val fragmentFavorite =
-//            supportFragmentManager.findFragmentByTag(Constant.TAG_FAVORITE_FRAGMENT)
-//                ?: FavoriteFragment.newInstance()
-
+        val fragmentFavorite =
+            supportFragmentManager.findFragmentByTag(Constants.TAG_FAVORITE_FRAGMENT)
+                ?: FavoriteFragment.newInstance()
         val fragmentDbFragment =
             supportFragmentManager.findFragmentByTag(Constants.TAG_PAGING_DB_FRAGMENT)
                 ?: PagingDbFragment.newInstance(application)
@@ -62,13 +63,15 @@ class MainActivity : BaseActivity<MainViewModel>() {
                 ?: PagingByItemFragment.newInstance()
         val fragmentPage = supportFragmentManager.findFragmentByTag(Constants.TAG_PAGING_BY_PAGE)
             ?: PagingByPageKeyFragment.newInstance()
+        val firestoreFragment = supportFragmentManager.findFragmentByTag(Constants.TAG_FIRESTORE)
+            ?: FirestoreFragment.newInstance()
 
         navigation_bottom.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
                     navigation_bottom.menu.getItem(1).isChecked = false
-                    navigation_bottom.menu.getItem(2).isChecked = false
-                    navigation_bottom.menu.getItem(3).isChecked = false
+//                    navigation_bottom.menu.getItem(2).isChecked = false
+//                    navigation_bottom.menu.getItem(3).isChecked = false
                     it.isChecked = true
                     replaceFragment(
                         fragmentHome,
@@ -77,6 +80,29 @@ class MainActivity : BaseActivity<MainViewModel>() {
                         false
                     )
                 }
+
+                R.id.navigation_forestore -> {
+                    navigation_bottom.menu.getItem(0).isChecked = false
+                    it.isChecked = true
+                    replaceFragment(
+                        firestoreFragment,
+                        R.id.frame_container,
+                        Constants.TAG_FIRESTORE,
+                        false
+                    )
+                }
+
+//                R.id.navigation_favorite -> {
+//                    navigation_bottom.menu.getItem(0).isChecked = false
+//                    it.isChecked = true
+//                    replaceFragment(
+//                        fragmentFavorite,
+//                        R.id.frame_container,
+//                        Constants.TAG_FAVORITE_FRAGMENT,
+//                        false
+//                    )
+//                }
+
 //                R.id.navigation_favorite -> {
 //                    navigation_bottom.menu.getItem(0).isChecked = false
 //                    it.isChecked = true
@@ -88,43 +114,44 @@ class MainActivity : BaseActivity<MainViewModel>() {
 //                    )
 //                }
 
-                R.id.navigation_paging_db -> {
-                    navigation_bottom.menu.getItem(0).isChecked = false
-                    navigation_bottom.menu.getItem(2).isChecked = false
-                    navigation_bottom.menu.getItem(3).isChecked = false
-                    it.isChecked = true
-                    replaceFragment(
-                        fragmentDbFragment,
-                        R.id.frame_container,
-                        Constants.TAG_FAVORITE_FRAGMENT,
-                        false
-                    )
-                }
+//                R.id.navigation_paging_db -> {
+//                    navigation_bottom.menu.getItem(0).isChecked = false
+//                    navigation_bottom.menu.getItem(2).isChecked = false
+//                    navigation_bottom.menu.getItem(3).isChecked = false
+//                    it.isChecked = true
+//                    replaceFragment(
+//                        fragmentDbFragment,
+//                        R.id.frame_container,
+//                        Constants.TAG_FAVORITE_FRAGMENT,
+//                        false
+//                    )
+//                }
+//
+//                R.id.navigation_paging_item_key -> {
+//                    navigation_bottom.menu.getItem(0).isChecked = false
+//                    navigation_bottom.menu.getItem(1).isChecked = false
+//                    navigation_bottom.menu.getItem(3).isChecked = false
+//                    it.isChecked = true
+//                    replaceFragment(
+//                        fragmentPagingByitem,
+//                        R.id.frame_container,
+//                        Constants.TAG_PAGING_BY_ITEM,
+//                        false
+//                    )
+//                }
+//                R.id.navigation_paging_page_key -> {
+//                    navigation_bottom.menu.getItem(0).isChecked = false
+//                    navigation_bottom.menu.getItem(1).isChecked = false
+//                    navigation_bottom.menu.getItem(2).isChecked = false
+//                    it.isChecked = true
+//                    replaceFragment(
+//                        fragmentPage,
+//                        R.id.frame_container,
+//                        Constants.TAG_PAGING_BY_PAGE,
+//                        false
+//                    )
+//                }
 
-                R.id.navigation_paging_item_key -> {
-                    navigation_bottom.menu.getItem(0).isChecked = false
-                    navigation_bottom.menu.getItem(1).isChecked = false
-                    navigation_bottom.menu.getItem(3).isChecked = false
-                    it.isChecked = true
-                    replaceFragment(
-                        fragmentPagingByitem,
-                        R.id.frame_container,
-                        Constants.TAG_PAGING_BY_ITEM,
-                        false
-                    )
-                }
-                R.id.navigation_paging_page_key -> {
-                    navigation_bottom.menu.getItem(0).isChecked = false
-                    navigation_bottom.menu.getItem(1).isChecked = false
-                    navigation_bottom.menu.getItem(2).isChecked = false
-                    it.isChecked = true
-                    replaceFragment(
-                        fragmentPage,
-                        R.id.frame_container,
-                        Constants.TAG_PAGING_BY_PAGE,
-                        false
-                    )
-                }
             }
             false
         }

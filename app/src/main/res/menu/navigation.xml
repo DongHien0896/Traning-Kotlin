@@ -2,27 +2,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
-
-    <!--<item-->
-    <!--android:id="@+id/navigation_favorite"-->
-    <!--android:icon="@drawable/ic_favorite_black_24dp"-->
-    <!--android:title="@string/title_favorite" />-->
+            android:id="@+id/navigation_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_paging_db"
-        android:icon="@drawable/ic_paging_db_black_24dp"
-        android:title="@string/title_paging_db" />
+            android:id="@+id/navigation_forestore"
+            android:icon="@drawable/default_notification"
+            android:title="Firestore" />
 
-    <item
-        android:id="@+id/navigation_paging_item_key"
-        android:icon="@drawable/ic_paging_item_black_24dp"
-        android:title="@string/title_paging_item_key" />
+    <!--    <item-->
+    <!--    android:id="@+id/navigation_favorite"-->
+    <!--    android:icon="@drawable/ic_favorite_black_24dp"-->
+    <!--    android:title="@string/title_favorite" />-->
 
-    <item
-        android:id="@+id/navigation_paging_page_key"
-        android:icon="@drawable/ic_paging_page_black_24dp"
-        android:title="@string/title_paging_page_key" />
+    <!--    <item-->
+    <!--        android:id="@+id/navigation_paging_db"-->
+    <!--        android:icon="@drawable/ic_paging_db_black_24dp"-->
+    <!--        android:title="@string/title_paging_db" />-->
+
+    <!--    <item-->
+    <!--        android:id="@+id/navigation_paging_item_key"-->
+    <!--        android:icon="@drawable/ic_paging_item_black_24dp"-->
+    <!--        android:title="@string/title_paging_item_key" />-->
+
+    <!--    <item-->
+    <!--        android:id="@+id/navigation_paging_page_key"-->
+    <!--        android:icon="@drawable/ic_paging_page_black_24dp"-->
+    <!--        android:title="@string/title_paging_page_key" />-->
 </menu>

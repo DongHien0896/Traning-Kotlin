@@ -18,4 +18,5 @@ object Constants {
     val TAG_PAGING_DB_FRAGMENT: String? = "PagingDbFragment"
     val TAG_PAGING_BY_ITEM: String? = "PagingByItemFragment"
     val TAG_PAGING_BY_PAGE: String? = "PagingByPageKeyFragment"
+    val TAG_FIRESTORE: String? = "FirestoreFragment"
 }

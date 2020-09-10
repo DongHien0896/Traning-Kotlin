@@ -1,13 +1,16 @@
 package com.framgia.kotlintraining.moviedb.service
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Build
 import android.os.RemoteException
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.framgia.kotlintraining.moviedb.R
 import com.framgia.kotlintraining.moviedb.di.createApi
 import com.framgia.kotlintraining.moviedb.screen.main.MainActivity
@@ -25,7 +28,7 @@ class MovieFirebaseMessagingService : FirebaseMessagingService() {
         super.onMessageReceived(remoteMessage)
 
         val intent = Intent(this, MainActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
 
         var title = ""
@@ -48,18 +51,23 @@ class MovieFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         try {
+
+
+            val channelId = getString(R.string.default_notification_channel_id)
+
             val pendingIntent = PendingIntent.getActivity(
                 this.applicationContext, 0 /* Request code */, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
-
-            val channelId = getString(R.string.default_notification_channel_id)
-
             val notificationBuilder = NotificationCompat.Builder(this.applicationContext, channelId)
                 .setSmallIcon(R.drawable.default_notification)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
+                .setAllowSystemGeneratedContextualActions(false)
+                .setStyle(NotificationCompat.BigTextStyle())
+                .setTimeoutAfter(2000)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
 
             val notificationManager =
@@ -68,11 +76,14 @@ class MovieFirebaseMessagingService : FirebaseMessagingService() {
                 val channel = NotificationChannel(
                     channelId,
                     getString(R.string.notification_channel),
-                    NotificationManager.IMPORTANCE_DEFAULT
+                    NotificationManager.IMPORTANCE_HIGH
                 )
                 notificationManager.createNotificationChannel(channel)
             }
             notificationManager.notify(0, notificationBuilder.build())
+            with(NotificationManagerCompat.from(this)) {
+                notify(0, notificationBuilder.build())
+            }
         } catch (e: RemoteException) {
             e.printStackTrace()
         }
